@@ -17,30 +17,32 @@ function capitalizeFirstLetter(word) {
     return firstLetter + word;
 }
 
-function updateScore() {
+function showScore() {
     const score = document.querySelector('.score');
+    score.textContent = `Player: ${playerScore} Computer: ${computerScore}`;
     if (playerScore === 5) {
         score.textContent = `Player Wins! Refresh to play again`
     }
     if (computerScore === 5) {
         score.textContent = `Computer Wins! Refresh to play again`
     }
-    score.textContent = `Player: ${playerScore} Computer: ${computerScore}`;
 }
 
 function youWin(computerSelection, playerSelection, result) {
     result.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
     playerScore++;
-    updateScore();
+    showScore();
 }
 
 function youLose(computerSelection, playerSelection, result) {
     result.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
     computerScore++;
-    updateScore();
+    showScore();
 }
 
-function playSingleRound(playerSelection) {
+function playRound(playerSelection) {
+    if (playerScore >= 5 || computerScore >= 5) return;
+
     const result = document.querySelector('.result');
     const computerSelection = getComputerChoice();
     playerSelection = capitalizeFirstLetter(playerSelection);
@@ -63,10 +65,11 @@ function playSingleRound(playerSelection) {
 
 let playerScore = 0;
 let computerScore = 0;
+showScore();
 
 const rock = document.querySelector('.rock');
 const paper = document.querySelector('.paper');
 const scissors = document.querySelector('.scissors');
-rock.addEventListener('click', () => playSingleRound('Rock'))
-paper.addEventListener('click', () => playSingleRound('Paper'))
-scissors.addEventListener('click', () => playSingleRound('Scissors'))
+rock.addEventListener('click', () => playRound('Rock'));
+paper.addEventListener('click', () => playRound('Paper'));
+scissors.addEventListener('click', () => playRound('Scissors'));
