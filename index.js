@@ -17,14 +17,27 @@ function capitalizeFirstLetter(word) {
     return firstLetter + word;
 }
 
+function updateScore() {
+    const score = document.querySelector('.score');
+    if (playerScore === 5) {
+        score.textContent = `Player Wins! Refresh to play again`
+    }
+    if (computerScore === 5) {
+        score.textContent = `Computer Wins! Refresh to play again`
+    }
+    score.textContent = `Player: ${playerScore} Computer: ${computerScore}`;
+}
+
 function youWin(computerSelection, playerSelection, result) {
     result.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
     playerScore++;
+    updateScore();
 }
 
 function youLose(computerSelection, playerSelection, result) {
     result.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
     computerScore++;
+    updateScore();
 }
 
 function playSingleRound(playerSelection) {
