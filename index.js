@@ -17,6 +17,16 @@ function capitalizeFirstLetter(word) {
     return firstLetter + word;
 }
 
+function youWin(computerSelection, playerSelection, result) {
+    result.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
+    playerScore++;
+}
+
+function youLose(computerSelection, playerSelection, result) {
+    result.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
+    computerScore++;
+}
+
 function playSingleRound(playerSelection) {
     const result = document.querySelector('.result');
     const computerSelection = getComputerChoice();
@@ -25,52 +35,25 @@ function playSingleRound(playerSelection) {
         result.textContent = 'Roll Again!';
     }
     if (playerSelection === 'Rock') {
-        if (computerSelection === 'Paper') {
-            result.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
-        }
-        if (computerSelection === 'Scissors') {
-            result.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
-        }
+        if (computerSelection === 'Paper') youLose(computerSelection, playerSelection, result); 
+        if (computerSelection === 'Scissors') youWin(computerSelection, playerSelection, result);
     }
-
     if (playerSelection === 'Paper') {
-        if (computerSelection === 'Scissors') {
-            result.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
-        }
-        if (computerSelection === 'Rock') {
-            result.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
-        }
+        if (computerSelection === 'Scissors') youLose(computerSelection, playerSelection, result); 
+        if (computerSelection === 'Rock') youWin(computerSelection, playerSelection, result);
     }
-
     if (playerSelection === 'Scissors') {
-        if (computerSelection === 'Rock') {
-            result.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
-        }
-        if (computerSelection === 'Paper') {
-            result.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
-        }
+        if (computerSelection === 'Rock') youLose(computerSelection, playerSelection, result); 
+        if (computerSelection === 'Paper') youWin(computerSelection, playerSelection, result);
     }
 }
 
-function game() {
-    const rock = document.querySelector('.rock');
-    const paper = document.querySelector('.paper');
-    const scissors = document.querySelector('.scissors');
-    rock.addEventListener('click', () => playSingleRound('Rock'))
-    paper.addEventListener('click', () => playSingleRound('Paper'))
-    scissors.addEventListener('click', () => playSingleRound('Scissors'))
+let playerScore = 0;
+let computerScore = 0;
 
-    //let result = playSingleRound(playerSelection, getComputerChoice());
-
-    /*while (result.includes('Roll Again')) {
-        result = playSingleRound(playerSelection, getComputerChoice());
-    }
-    console.log(result);
-
-    if (result.includes('Win')) {
-        playerScore += 1;
-    }*/
-
-}
-
-game();
+const rock = document.querySelector('.rock');
+const paper = document.querySelector('.paper');
+const scissors = document.querySelector('.scissors');
+rock.addEventListener('click', () => playSingleRound('Rock'))
+paper.addEventListener('click', () => playSingleRound('Paper'))
+scissors.addEventListener('click', () => playSingleRound('Scissors'))
