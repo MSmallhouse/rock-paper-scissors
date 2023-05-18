@@ -17,7 +17,8 @@ function capitalizeFirstLetter(word) {
     return firstLetter + word;
 }
 
-function playSingleRound(playerSelection, computerSelection) {
+function playSingleRound(playerSelection) {
+    const computerSelection = getComputerChoice();
     playerSelection = capitalizeFirstLetter(playerSelection);
     if (playerSelection === computerSelection) {
         return 'Roll Again!'
@@ -51,26 +52,24 @@ function playSingleRound(playerSelection, computerSelection) {
 }
 
 function game() {
-    let playerScore = 0;
-    for (let i=0; i<5; i++) {
-        let playerSelection = prompt("Choose Rock, Paper, or Scissors");
-        let result = playSingleRound(playerSelection, getComputerChoice());
-        while (result.includes('Roll Again')) {
-            result = playSingleRound(playerSelection, getComputerChoice());
-        }
-        console.log(result);
+    const rock = document.querySelector('.rock');
+    const paper = document.querySelector('.paper');
+    const scissors = document.querySelector('.scissors');
+    rock.addEventListener('click', () => playSingleRound('Rock'))
+    paper.addEventListener('click', () => playSingleRound('Paper'))
+    scissors.addEventListener('click', () => playSingleRound('Scissors'))
 
-        if (result.includes('Win')) {
-            playerScore += 1;
-        }
-    }
+    //let result = playSingleRound(playerSelection, getComputerChoice());
 
-    if (playerScore >= 3) {
-        console.log('You Win best of 5');
+    /*while (result.includes('Roll Again')) {
+        result = playSingleRound(playerSelection, getComputerChoice());
     }
-    else {
-        console.log('You Lose Best of 5');
-    }
+    console.log(result);
+
+    if (result.includes('Win')) {
+        playerScore += 1;
+    }*/
+
 }
 
 game();
