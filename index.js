@@ -18,35 +18,36 @@ function capitalizeFirstLetter(word) {
 }
 
 function playSingleRound(playerSelection) {
+    const result = document.querySelector('.result');
     const computerSelection = getComputerChoice();
     playerSelection = capitalizeFirstLetter(playerSelection);
     if (playerSelection === computerSelection) {
-        return 'Roll Again!'
+        result.textContent = 'Roll Again!';
     }
     if (playerSelection === 'Rock') {
         if (computerSelection === 'Paper') {
-            return `You Lose! ${computerSelection} beats ${playerSelection}`;
+            result.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
         }
         if (computerSelection === 'Scissors') {
-            return `You Win! ${playerSelection} beats ${computerSelection}`;
+            result.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
         }
     }
 
     if (playerSelection === 'Paper') {
         if (computerSelection === 'Scissors') {
-            return `You Lose! ${computerSelection} beats ${playerSelection}`;
+            result.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
         }
         if (computerSelection === 'Rock') {
-            return `You Win! ${playerSelection} beats ${computerSelection}`;
+            result.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
         }
     }
 
     if (playerSelection === 'Scissors') {
         if (computerSelection === 'Rock') {
-            return `You Lose! ${computerSelection} beats ${playerSelection}`;
+            result.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
         }
         if (computerSelection === 'Paper') {
-            return `You Win! ${playerSelection} beats ${computerSelection}`;
+            result.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
         }
     }
 }
